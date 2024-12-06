@@ -3,6 +3,12 @@
                 (slot question (type STRING))
                 (slot answer (type STRING))
             )
+            (deftemplate back
+                (slot question (type STRING))
+            )
+            (deftemplate set-unknown
+                (slot question (type STRING))
+            )
             (deftemplate to-modify
                 (slot question (type STRING))
                 (slot answer (type STRING))
@@ -43,6 +49,7 @@
                 (assert (answer-to-question (question "pre-heat")(answer "unknown")))
             )
             (defrule modify-fact
+                
                 ?g <- (to-modify (question ?x) (answer ?y))
                 ?f <- (answer-to-question (question ?x))
                 ?h <- (ask (question ?x))
@@ -50,6 +57,17 @@
                 (modify ?f (answer ?y))
                 (retract ?g)
                 (retract ?h)
+            )
+            (defrule back-rule
+                ?g <- (back (question ?x))
+                ?f <- (ask (question ?x))
+                ?h <- (set-unknown (question ?y))
+                ?i <- (answer-to-question (question ?y))
+                =>
+                (retract ?f)
+                (retract ?g)
+                (retract ?h)
+                (modify ?i (question "unknown"))
             )
             (defrule japan
                 (answer-to-question (question "japan") (answer "unknown"))
@@ -61,7 +79,7 @@
                 =>
                 (assert (food-result micro-magic))
             )
-
+            ;;;
             (defrule unemployed
                 (answer-to-question (question "japan") (answer "no"))
                 (answer-to-question (question "unemployed") (answer "unknown"))
@@ -75,7 +93,7 @@
                 (assert (food-result country-rick))
                 (assert (food-result burrito))
             )
-
+            ;;;
             (defrule alaska
                 (answer-to-question (question "unemployed") (answer "no"))
                 (answer-to-question (question "alaska") (answer "unknown"))
@@ -87,7 +105,7 @@
                 =>
                 (assert (food-result stouffers-bear))
             )
-
+            ;;;
             (defrule diet
                 (answer-to-question (question "alaska") (answer "no"))
                 (answer-to-question (question "diet") (answer "unknown"))
@@ -100,9 +118,42 @@
                 (assert (food-result smart-ones))
                 (assert (food-result lean-cuisine))
             )
-
-            (defrule living-with-parents
+            ;;;
+            (defrule vegetarian
                 (answer-to-question (question "diet") (answer "no"))
+                (answer-to-question (question "vegetarian") (answer "unknown"))
+                =>
+                (assert (ask (question "vegetarian")))
+            )
+            ;;;
+            (defrule vegan
+                (answer-to-question (question "vegetarian") (answer "yes"))
+                (answer-to-question (question "vegan") (answer "unknown"))
+                =>
+                (assert (ask (question "vegan")))
+            )
+            (defrule suggest-food-vegan
+                (answer-to-question (question "vegan") (answer "no"))
+                =>
+                (assert (food-result enchilada))
+                (assert (food-result tamales))
+            )
+            (defrule suggest-food-vegan-2
+                (answer-to-question (question "vegan") (answer "yes"))
+                =>
+                (assert (food-result tofurky))
+                (assert (food-result boca))
+            )
+            ;;;
+            (defrule pizza
+                (answer-to-question (question "vegetarian") (answer "no"))
+                (answer-to-question (question "pizza") (answer "unknown"))
+                =>
+                (assert (ask (question "pizza")))
+            )
+            ;;;
+            (defrule living-with-parents
+                (answer-to-question (question "pizza") (answer "yes"))
                 (answer-to-question (question "with-parents") (answer "unknown"))
                 =>
                 (assert (ask (question "with-parents")))
@@ -111,6 +162,65 @@
                 (answer-to-question (question "with-parents") (answer "yes"))
                 =>
                 (assert (food-result tombstone-pizza))
+                (assert (food-result crisp-crust))
+                (assert (food-result tonys-original-crust))
+                (assert (food-result celeste))
+            )
+            ;;;
+            (defrule impress
+                (answer-to-question (question "with-parents") (answer "no"))
+                (answer-to-question (question "impress") (answer "unknown"))
+                =>
+                (assert (ask (question "impress")))
+            )
+            (defrule suggest-food-impress-yes
+                (answer-to-question (question "impress") (answer "yes"))
+                =>
+                (assert (food-result crispy-thin-crust))
+            )
+            (defrule suggest-food-impress-no
+                (answer-to-question (question "impress") (answer "no"))
+                =>
+                (assert (food-result stone-hearth))
+                (assert (food-result for-one))
+                (assert (food-result naturally-rising))
+            )
+            ;;;
+            (defrule cleaning
+                (answer-to-question (question "pizza") (answer "no"))
+                (answer-to-question (question "cleaning") (answer "unknown"))
+                =>
+                (assert (ask (question "cleaning")))
+            )
+            (defrule suggest-food-cleaning
+                (answer-to-question (question "cleaning") (answer "yes"))
+                =>
+                (assert (food-result banquet-meal))
+                (assert (food-result swanson))
+            )
+            ;;;
+            (defrule doctor-who
+                (answer-to-question (question "cleaning") (answer "no"))
+                (answer-to-question (question "who") (answer "unknown"))
+                =>
+                (assert (ask (question "who")))
+            )
+            (defrule suggest-food-doctor-who
+                (answer-to-question (question "who") (answer "yes"))
+                =>
+                (assert (food-result ben-and-jerrys))
+            )
+            ;;;
+            (defrule thirsty
+                (answer-to-question (question "who") (answer "no"))
+                (answer-to-question (question "thirsty") (answer "unknown"))
+                =>
+                (assert (ask (question "thirsty")))
+            )
+            (defrule suggest-food-thirsty
+                (answer-to-question (question "thirsty") (answer "yes"))
+                =>
+                (assert (food-result minute-maid))
             )
 
 
