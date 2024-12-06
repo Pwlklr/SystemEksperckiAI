@@ -60,6 +60,7 @@ class ExpertSystemApp:
 
         # Uruchomienie procesu wnioskowania
         self.env.run()
+        self.env.run()
     
         # Sprawdzenie wyników w pamięci roboczej (faktów)
         facts = list(self.env.facts())  # Konwertowanie generatora na listę
