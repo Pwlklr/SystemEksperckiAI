@@ -81,7 +81,8 @@ class ExpertSystemApp:
                 self.button.pack(pady=10)
             elif ask_facts:
                 # Zadawanie pytania
-                self.prev_questions.append(self.question)
+                if self.question and self.question != str(ask_facts[0])[16:-3]:
+                    self.prev_questions.append(self.question)
                 self.question = str(ask_facts[0])[16:-3]
                 self.questions()
         else:
@@ -162,7 +163,8 @@ class ExpertSystemApp:
         self.question_label.pack(pady=(30, 10))  # Space above, smaller space below
         self.yes_button.pack(pady=15, padx=30)  # More horizontal space, stretch horizontally
         self.no_button.pack(pady=15, padx=30)   # Matching with the yes_button
-        self.back_button.pack(pady=15, padx=30)    # More balanced padding
+        if len(self.prev_questions) >= 1:
+            self.back_button.pack(pady=15, padx=30)    # More balanced padding
 
     def yes(self):
         self.template.assert_fact(question = self.question, answer = "yes")
@@ -173,6 +175,7 @@ class ExpertSystemApp:
     def back(self):
         self.template_back.assert_fact(question = self.question)
         self.template_set_unknown.assert_fact(question = self.prev_questions[-1])
+        self.question = self.prev_questions[-1]
         self.prev_questions = self.prev_questions[:-1] 
         self.loop()
         

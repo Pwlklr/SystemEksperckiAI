@@ -67,7 +67,7 @@
                 (retract ?f)
                 (retract ?g)
                 (retract ?h)
-                (modify ?i (question "unknown"))
+                (modify ?i (answer "unknown"))
             )
             (defrule japan
                 (answer-to-question (question "japan") (answer "unknown"))
