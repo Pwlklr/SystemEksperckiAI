@@ -111,47 +111,47 @@ class ExpertSystemApp:
             case 'with-parents':
                 question_label_text = 'Are you still living with your parents?'
             case 'cleaning':
-                question_label_text = 'Do you need a good cleaning?'
+                question_label_text = 'Do you need good "cleaning"?'
             case 'who':
                 question_label_text = 'Are you Doctor Who?'
             case 'impress':
-                question_label_text = 'Are you trying to impress someone?'
+                question_label_text = 'Are you trying to impress?'
             case 'thirsty':
                 question_label_text = 'Are you thirsty?'
             case 'breakfast':
                 question_label_text = 'Do you want breakfast?'
             case 'summer-2010':
-                question_label_text = 'Are you thinking of summer 2010?'
+                question_label_text = 'Is it summer 2010?'
             case 'jewish':
                 question_label_text = 'Are you Jewish?'
             case 'elaine-benes':
-                question_label_text = 'Do you identify with Elaine Benes?'
+                question_label_text = 'Are you Elaine Benes?'
             case 'wow':
-                question_label_text = 'Do you feel like saying "wow"?'
+                question_label_text = 'Are you playing WoW?'
             case 'foreman':
-                question_label_text = 'Are you thinking about a foreman?'
+                question_label_text = 'Are you using a foreman?'
             case 'dessert':
-                question_label_text = 'Are you in the mood for dessert?'
+                question_label_text = 'Do you want dessert?'
             case 'childhood':
-                question_label_text = 'Does this remind you of your childhood?'
+                question_label_text = 'Are you trying to relieve?'
             case 'pie':
                 question_label_text = 'Do you want pie?'
             case 'school':
-                question_label_text = 'Does this remind you of school?'
+                question_label_text = 'Did you just get home from school?'
             case 'drunk-high':
-                question_label_text = 'Are you drunk or high?'
+                question_label_text = 'Are you drunk and/or high?'
             case 'ice-cream':
                 question_label_text = 'Do you want ice cream?'
             case 'lactose-intolerant':
                 question_label_text = 'Are you lactose intolerant?'
             case 'spoon':
-                question_label_text = 'Do you have a spoon handy?'
-            case 'chain':
-                question_label_text = 'Are you thinking of a chain restaurant?'
+                question_label_text = 'Do you have a spoon?'
             case 'ethnic':
                 question_label_text = 'Are you in the mood for ethnic food?'
+            case 'chain':
+                question_label_text = 'Do you like chain restaurants?'
             case 'pre-heat':
-                question_label_text = 'Do you want to pre-heat the oven?'
+                question_label_text = 'Do you know hot to pre-heat the oven?'
             case _:
                 question_label_text = 'Unknown question.'
 

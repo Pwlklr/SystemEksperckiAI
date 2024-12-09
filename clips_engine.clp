@@ -217,11 +217,78 @@
                 =>
                 (assert (ask (question "thirsty")))
             )
-            (defrule suggest-food-thirsty
+            (defrule suggest-food-thirsty-yes
                 (answer-to-question (question "thirsty") (answer "yes"))
                 =>
                 (assert (food-result minute-maid))
             )
+            ;;;
+            (defrule breakfast
+                (answer-to-question (question "thirsty") (answer "no"))
+                (answer-to-question (question "breakfast") (answer "unknown"))
+                =>
+                (assert (ask (question "breakfast")))
+            )
+            ;;;
+            (defrule jewish
+                (answer-to-question (question "breakfast") (answer "no"))
+                (answer-to-question (question "jewish") (answer "unknown"))
+                =>
+                (assert (ask (question "jewish")))
+            )
+            (defrule suggest-food-jewish-yes
+                (answer-to-question (question "jewish") (answer "yes"))
+                =>
+                (assert (food-result gabilas))
+            )
+            ;;;
+            (defrule summer-2010
+                (answer-to-question (question "breakfast") (answer "yes"))
+                (answer-to-question (question "summer-2010") (answer "unknown"))
+                =>
+                (assert (ask (question "summer-2010")))
+            )
+            (defrule suggest-food-summer-2010-no
+                (answer-to-question (question "summer-2010") (answer "no"))
+                =>
+                (assert (food-result bob-evans-brunch-bowls))
+                (assert (food-result croissant))
+                (assert (food-result bagel-shoppe))
+                (assert (food-result toaster-strudel))
+            )
+            ;;;
+            (defrule elaine-benes
+                (answer-to-question (question "summer-2010") (answer "yes"))
+                (answer-to-question (question "elaine-benes") (answer "unknown"))
+                =>
+                (assert (ask (question "elaine-benes")))
+            )
+            (defrule suggest-food-elaine-benes-yes
+                (answer-to-question (question "elaine-benes") (answer "yes"))
+                =>
+                (assert (food-result muffin-tops))
+            )
+            (defrule suggest-food-elaine-benes-no
+                (answer-to-question (question "elaine-benes") (answer "no"))
+                =>
+                (assert (food-result eggo))
+                (assert (food-result toaster-sticks))
+            )
+            ;;;
+            (defrule wow
+                (answer-to-question (question "jewish") (answer "no"))
+                (answer-to-question (question "wow") (answer "unknown"))
+                =>
+                (assert (ask (question "wow")))
+            )
+            (defrule suggest-food-wow-yes
+                (answer-to-question (question "wow") (answer "yes"))
+                =>
+                (assert (food-result hungry-man))
+            )
+
+
+
 
 
 
