@@ -286,9 +286,187 @@
                 =>
                 (assert (food-result hungry-man))
             )
-
-
-
-
-
-
+            ;;;
+            (defrule foreman
+                (answer-to-question (question "wow") (answer "no"))
+                (answer-to-question (question "foreman") (answer "unknown"))
+                =>
+                (assert (ask (question "foreman")))
+            )
+            (defrule suggest-food-foreman-yes
+                (answer-to-question (question "foreman") (answer "yes"))
+                =>
+                (assert (food-result tyson-chicken-breasts))
+            )
+            ;;;
+            (defrule dessert
+                (answer-to-question (question "foreman") (answer "no"))
+                (answer-to-question (question "dessert") (answer "unknown"))
+                =>
+                (assert (ask (question "dessert")))
+            )
+            ;;;
+            (defrule childhood
+                (answer-to-question (question "dessert") (answer "yes"))
+                (answer-to-question (question "childhood") (answer "unknown"))
+                =>
+                (assert (ask (question "childhood")))
+            )
+            (defrule suggest-food-childhood-yes
+                (answer-to-question (question "childhood") (answer "yes"))
+                =>
+                (assert (food-result orange-cherry-grape-popsicles))
+                (assert (food-result 100-otter-pops))
+                (assert (food-result strawberry-shortcake))
+            )
+            ;;;
+            (defrule pie
+                (answer-to-question (question "childhood") (answer "no"))
+                (answer-to-question (question "pie") (answer "unknown"))
+                =>
+                (assert (ask (question "pie")))
+            )
+            (defrule suggest-food-pie-yes
+                (answer-to-question (question "pie") (answer "yes"))
+                =>
+                (assert (food-result mrs-smiths-apple-pie))
+                (assert (food-result oreo-cream-pie))
+                (assert (food-result sara-lee-apple-pie))
+                (assert (food-result marie-callenders-lattice-apple-pie))
+            )
+            ;;;
+            (defrule school
+                (answer-to-question (question "dessert") (answer "no"))
+                (answer-to-question (question "school") (answer "unknown"))
+                =>
+                (assert (ask (question "school")))
+            )
+            (defrule suggest-food-school-yes
+                (answer-to-question (question "school") (answer "yes"))
+                =>
+                (assert (food-result kid-cuisine))
+                (assert (food-result french-bread-pizza))
+                (assert (food-result super-pretzel))
+            )
+            ;;;
+            (defrule drunk-high
+                (answer-to-question (question "school") (answer "no"))
+                (answer-to-question (question "drunk-high") (answer "unknown"))
+                =>
+                (assert (ask (question "drunk-high")))
+            )
+            (defrule suggest-food-drunk-high-yes
+                (answer-to-question (question "drunk-high") (answer "yes"))
+                =>
+                (assert (food-result white-castle-hamburgers))
+                (assert (food-result hot-pockets-four-cheese-pizza))
+                (assert (food-result totinos-pizza-rolls))
+                (assert (food-result kraft-bagelfuls-original))
+                (assert (food-result bagel-bites-three-cheese))
+                (assert (food-result corn-dogs))
+                (assert (food-result gortons-crunchy-fish-sticks))
+                (assert (food-result tgi-fridays-potato-skins))
+                (assert (food-result tyson-anytizers))
+                (assert (food-result jimmy-dean-pancakes-and-sausage-on-a-stick))
+            )
+            ;;;
+            (defrule ice-cream
+                (answer-to-question (question "pie") (answer "no"))
+                (answer-to-question (question "ice-cream") (answer "unknown"))
+                =>
+                (assert (ask (question "ice-cream")))
+            )
+            (defrule suggest-food-ice-cream-no
+                (answer-to-question (question "ice-cream") (answer "no"))
+                =>
+                (assert (food-result puff-pastry-turnovers))
+                (assert (food-result sara-lee-cheeskake))
+                (assert (food-result chocolate-fudge))
+                (assert (food-result cool-whip))
+            )
+            ;;;
+            (defrule lactose-intolerant
+                (answer-to-question (question "ice-cream") (answer "yes"))
+                (answer-to-question (question "lactose-intolerant") (answer "unknown"))
+                =>
+                (assert (ask (question "lactose-intolerant")))
+            )
+            (defrule suggest-food-lactose-intolerant-yes
+                (answer-to-question (question "lactose-intolerant") (answer "yes"))
+                =>
+                (assert (food-result so-delicious-dairy-free))
+            )
+            ;;;
+            (defrule spoon
+                (answer-to-question (question "lactose-intolerant") (answer "yes"))
+                (answer-to-question (question "spoon") (answer "unknown"))
+                =>
+                (assert (ask (question "spoon")))
+            )
+            (defrule suggest-food-spoon-yes
+                (answer-to-question (question "spoon") (answer "yes"))
+                =>
+                   (assert (food-result ben-and-jerrys-phish-food))
+                   (assert (food-result breyers-reeses-peanut-butter-cups))
+                   (assert (food-result haagen-dazs-vanilla-bean))
+                   (assert (food-result blue-bell-ice-cream))
+                   (assert (food-result edys-slow-churned-chocolate-chip))
+                   (assert (food-result turkey-hill-chocolate-peanut-butter-cup))
+            )(defrule suggest-food-spoon-no
+                (answer-to-question (question "spoon") (answer "no"))
+                =>
+                   (assert (food-result klondike-original))
+                   (assert (food-result toll-house-chocolate-chip-cookie-sandwich))
+                   (assert (food-result drumstick-cone))
+                   (assert (food-result fat-boy))
+            )
+            ;;;
+            (defrule ethnic
+                (answer-to-question (question "drunk-high") (answer "no"))
+                (answer-to-question (question "ethnic") (answer "unknown"))
+                =>
+                (assert (ask (question "ethnic")))
+            )
+            (defrule suggest-food-ethnic-yes
+                (answer-to-question (question "ethnic") (answer "yes"))
+                =>
+                (assert (food-result tai-pei-teriyaki))
+                (assert (food-result chicken-tikka-masala))
+                (assert (food-result ling-ling-popstickers))
+                (assert (food-result don-miguel-tacos))
+            )
+            ;;;
+            (defrule chain
+                (answer-to-question (question "ethnic") (answer "no"))
+                (answer-to-question (question "chain") (answer "unknown"))
+                =>
+                (assert (ask (question "chain")))
+            )
+            (defrule suggest-food-chain-yes
+                (answer-to-question (question "chain") (answer "yes"))
+                =>
+                (assert (food-result claim-jumper-spaghetti-and-meatballs))
+                (assert (food-result marie-callenders-honey-roasted-turkey))
+                (assert (food-result stouffers-macaroni-beef))
+                (assert (food-result boston-turkey-breast-medalion))
+            )
+            ;;;
+            (defrule pre-heat
+                (answer-to-question (question "chain") (answer "no"))
+                (answer-to-question (question "pre-heat") (answer "unknown"))
+                =>
+                (assert (ask (question "pre-heat")))
+            )
+            (defrule suggest-food-pre-heat-yes
+                (answer-to-question (question "pre-heat") (answer "yes"))
+                =>
+                (assert (food-result ore-ida-steak-fries))
+                (assert (food-result ore-ida-tater-tots))
+                (assert (food-result original-poppers-cream-cheese))
+                (assert (food-result michael-angelos-lasagna))
+            )
+            (defrule suggest-food-pre-heat-no
+                (answer-to-question (question "pre-heat") (answer "no"))
+                =>
+                (assert (food-result smuckers-uncrustables))
+            )

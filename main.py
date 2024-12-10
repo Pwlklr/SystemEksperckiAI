@@ -7,7 +7,7 @@ class ExpertSystemApp:
         # Inicjalizacja głównego okna
         self.root = root
         self.root.title("Expert System - What Should I Eat?")
-        self.root.geometry("400x300")
+        self.root.geometry("400x400")
 
         # Etykieta powitalna
         self.label = tk.Label(root, text="Welcome to the Expert System!", font=("Arial", 14))
@@ -134,7 +134,7 @@ class ExpertSystemApp:
             case 'dessert':
                 question_label_text = 'Do you want dessert?'
             case 'childhood':
-                question_label_text = 'Are you trying to relieve?'
+                question_label_text = 'Are you trying to relieve childhood?'
             case 'pie':
                 question_label_text = 'Do you want pie?'
             case 'school':
