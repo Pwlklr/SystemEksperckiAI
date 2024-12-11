@@ -1,6 +1,6 @@
 import tkinter as tk
 import clips
-
+import json
 
 class ExpertSystemApp:
     def __init__(self, root):
@@ -28,6 +28,11 @@ class ExpertSystemApp:
         self.yes_button = tk.Button(root, text="Yes", command=self.yes)
         self.no_button = tk.Button(root, text="No", command=self.no)
         self.back_button = tk.Button(root, text="Back", command=self.back)
+
+        # Pytania z pliku json
+        with open('questions.json', 'r', encoding='utf-8') as file:
+            self.question_list = json.load(file)
+
 
 
         
@@ -94,69 +99,8 @@ class ExpertSystemApp:
         
         print(self.question)
 
-        match self.question:
-            case 'japan':
-                question_label_text = 'Are you from Japan?'
-            case 'unemployed':
-                question_label_text = 'Are you unemployed?'
-            case 'alaska':
-                question_label_text = 'Are you in Alaska?'
-            case 'diet':
-                question_label_text = 'Are you on a diet?'
-            case 'vegetarian':
-                question_label_text = 'Are you a vegetarian?'
-            case 'vegan':
-                question_label_text = 'Are you vegan?'
-            case 'pizza':
-                question_label_text = 'Do you want pizza?'
-            case 'with-parents':
-                question_label_text = 'Are you still living with your parents?'
-            case 'cleaning':
-                question_label_text = 'Do you need good "cleaning"?'
-            case 'who':
-                question_label_text = 'Are you Doctor Who?'
-            case 'impress':
-                question_label_text = 'Are you trying to impress?'
-            case 'thirsty':
-                question_label_text = 'Are you thirsty?'
-            case 'breakfast':
-                question_label_text = 'Do you want breakfast?'
-            case 'summer-2010':
-                question_label_text = 'Is it summer 2010?'
-            case 'jewish':
-                question_label_text = 'Are you Jewish?'
-            case 'elaine-benes':
-                question_label_text = 'Are you Elaine Benes?'
-            case 'wow':
-                question_label_text = 'Are you playing WoW?'
-            case 'foreman':
-                question_label_text = 'Are you using a foreman?'
-            case 'dessert':
-                question_label_text = 'Do you want dessert?'
-            case 'childhood':
-                question_label_text = 'Are you trying to relieve childhood?'
-            case 'pie':
-                question_label_text = 'Do you want pie?'
-            case 'school':
-                question_label_text = 'Did you just get home from school?'
-            case 'drunk-high':
-                question_label_text = 'Are you drunk and/or high?'
-            case 'ice-cream':
-                question_label_text = 'Do you want ice cream?'
-            case 'lactose-intolerant':
-                question_label_text = 'Are you lactose intolerant?'
-            case 'spoon':
-                question_label_text = 'Do you have a spoon?'
-            case 'ethnic':
-                question_label_text = 'Are you in the mood for ethnic food?'
-            case 'chain':
-                question_label_text = 'Do you like chain restaurants?'
-            case 'pre-heat':
-                question_label_text = 'Do you know hot to pre-heat the oven?'
-            case _:
-                question_label_text = 'Unknown question.'
-
-        
+        #Dobór pytania z pliku json
+        question_label_text = self.question_list[self.question]
         
         # Ustawianie pytania i odpowiedzi
         self.question_label.config(text=question_label_text)
