@@ -1,5 +1,10 @@
 # SystemEksperckiAI
-Autorzy: Filip Urbański, Paweł Kelar
-Python 3.12.1
-moduł clips 1.0.4
-moduł Tkinter 8.6
+
+## Autorzy
+- **Filip Urbański**
+- **Paweł Kelar**
+
+## Technologie
+- **Python**: `3.12.1`
+- **CLIPS**: `1.0.4`
+- **Tkinter**: `8.6`
