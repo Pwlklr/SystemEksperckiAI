@@ -23,10 +23,15 @@ class ExpertSystemApp:
 
         # Pytanie
         self.question_label = tk.Label(root, text="", font=("Arial", 12))
+
+        #Odpowiedz
+        self.answer = "unnkown"
         
         # Przyciski do odpowiadania
-        self.yes_button = tk.Button(root, text="Yes", command=self.yes)
-        self.no_button = tk.Button(root, text="No", command=self.no)
+        self.answer_button_1 = tk.Button(root, text="", command= self.answer_func)
+        self.answer_button_2 = tk.Button(root, text="", command= self.answer_func)
+        self.answer_button_3 = tk.Button(root, text="")
+
         self.back_button = tk.Button(root, text="Back", command=self.back)
 
         # Pytania z pliku json
@@ -51,19 +56,22 @@ class ExpertSystemApp:
         self.env.load("clips_engine.clp")
 
         # Przygotowanie templatki do modyfikacji
-        self.template = self.env.find_template("to-modify")
+        self.template_to_modify = self.env.find_template("to-modify")
         self.template_back = self.env.find_template("back")
         self.template_set_unknown = self.env.find_template("set-unknown")
+        self.template_question = self.env.find_template("answer-to-question")
 
         self.loop()
     def loop(self):
         # Chowanie elementow
         self.question_label.pack_forget() 
-        self.yes_button.pack_forget() 
-        self.no_button.pack_forget() 
+        self.answer_button_1.pack_forget() 
+        self.answer_button_2.pack_forget()
+        self.answer_button_3.pack_forget() 
         self.back_button.pack_forget()
 
         # Uruchomienie procesu wnioskowania
+        self.env.run()
         self.env.run()
     
         # Sprawdzenie wyników w pamięci roboczej (faktów)
@@ -97,6 +105,12 @@ class ExpertSystemApp:
         self.result_label.pack_forget()
         
         
+
+# Extract slot information and allowed values
+        for slot in self.template_question.slots:
+            allowed_values = slot.allowed_values
+            if allowed_values is not None and slot.name == 'answer':
+                print("Allowed Values:", list(allowed_values))
         print(self.question)
 
         #Dobór pytania z pliku json
@@ -105,16 +119,20 @@ class ExpertSystemApp:
         # Ustawianie pytania i odpowiedzi
         self.question_label.config(text=question_label_text)
         self.question_label.pack(pady=(30, 10))  # Space above, smaller space below
-        self.yes_button.pack(pady=15, padx=30)  # More horizontal space, stretch horizontally
-        self.no_button.pack(pady=15, padx=30)   # Matching with the yes_button
+
+        self.answer_button_1.configure(text=list(allowed_values)[0], command= lambda: self.answer_func(list(allowed_values)[0]))
+        self.answer_button_2.configure(text=list(allowed_values)[1], command= lambda: self.answer_func(list(allowed_values)[1]))
+        self.answer_button_3.configure(text=list(allowed_values)[2])
+
+        self.answer_button_1.pack(pady=15, padx=30)  # More horizontal space, stretch horizontally
+        self.answer_button_2.pack(pady=15, padx=30)   # Matching with the yes_button
+        self.answer_button_3.pack(pady=15, padx=30)   # Matching with the yes_button
+
         if len(self.prev_questions) >= 1:
             self.back_button.pack(pady=15, padx=30)    # More balanced padding
 
-    def yes(self):
-        self.template.assert_fact(question = self.question, answer = "yes")
-        self.loop()
-    def no(self):
-        self.template.assert_fact(question = self.question, answer = "no")
+    def answer_func(self, answer):
+        self.template_to_modify.assert_fact(question = self.question, answer = answer)
         self.loop()
     def back(self):
         self.template_back.assert_fact(question = self.question)

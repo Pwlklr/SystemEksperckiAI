@@ -1,7 +1,7 @@
 
             (deftemplate answer-to-question
                 (slot question (type STRING))
-                (slot answer (type STRING))
+                (slot answer (type STRING) (allowed-values "yes" "no" "unknown"))
             )
             (deftemplate back
                 (slot question (type STRING))
