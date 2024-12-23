@@ -100,7 +100,8 @@ class ExpertSystemApp:
         for slot in self.template_question.slots:
             if slot.name == 'answer' and slot.allowed_values:
                 allowed_values = list(slot.allowed_values)
-
+        if "unknown" in allowed_values:
+            allowed_values.remove("unknown")
         # print(f"Allowed Values: {allowed_values}")
 
         # Ustawianie pytania
@@ -115,10 +116,9 @@ class ExpertSystemApp:
 
         # Tworzenie dynamicznych przycisków odpowiedzi
         for value in allowed_values:
-            if value != "unknown":
-                button = tk.Button(self.root, text=value, command=lambda val=value: self.answer_func(val))
-                button.pack(pady=15, padx=30)
-                self.answer_buttons.append(button)
+            button = tk.Button(self.root, text=value, command=lambda val=value: self.answer_func(val))
+            button.pack(pady=15, padx=30)
+            self.answer_buttons.append(button)
 
         # Wyświetlenie przycisku "Back", jeśli wymagane
         if self.prev_questions:
